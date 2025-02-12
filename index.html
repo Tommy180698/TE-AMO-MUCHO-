@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> UN RECORDATORIO PARA QUE NUNCA OLVIDES QUE TE AMO - 14 de febrero</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffd1dc; /* Rosa pastel */
+      background-image: url('snoopy_amor.jpeg'); /* Imagen de Snoopy con corazones */
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+      position: relative;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      margin: 20px 0;
+    }
+    .gallery img {
+      width: 100%;
+      border: 5px solid #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s;
+    }
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+    }
+    .modal-content p {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+    .modal-content button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #ff6f91;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .modal-content button:hover {
+      background-color: #ff4d75;
+    }
+    /* Audio oculto */
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>ERES EL AMOR DE MI VIDA, TE AMO</h1>
+  <div class="gallery">
+    <img src="imagenes/caminando_amor.jpg" alt="caminando juntos" data-message="Este es uno de los momentos que más recuerdo y más me gustaron, caminar contigo y besarte mucho en ese parque fue muy especial para mí, quisiera regresar y darte muchos besos más, abrazarte como si fuera la primera vez.">
+    <img src="imagenes/gym_amor.jpg" alt="gym juntos" data-message="No tenemos muchas fotos de nuestro primer entrenamiento, pero fue lindo hacerlo juntos. Prácticamente fue nuestra primera cita, y el lugar donde recibí tu primer beso, te amo mucho mi niña preciosa.">
+    <img src="imagenes/parados_amor.jpg" alt="juntos" data-message="Ese día fue mágico y, desde entonces, mi amor por ti solo ha crecido. Fue increible, no me imaginaba llegar tan lejos y vaya que lo hice jajaja TE AMOOOOO">
+    <img src="imagenes/sentados_amor.jpg" alt="sentados" data-message="Esta es la foto que más me gusta, es muy instagrameable pese a que tengamos la cama destrozada al lado, amo sentirte y saber que eres mía. Te amo más de lo que imaginas.">
+    <img src="imagenes/sonrisa_amor.jpg" alt="sonrisa juntos" data-message="Cuando te vi, ya sabía que eras especial. Hoy, mi amor por ti se fortalece cada día. Me tienes muy feliz mi princesa hermosa">
+  </div>
++
+  <!-- Modal para mostrar el mensaje -->
+  <div class="modal" id="messageModal">
+    <div class="modal-content">
+      <p id="modalMessage">Mensaje aquí</p>
+      <button id="closeModal">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Música de fondo -->
+  <audio id="backgroundMusic" src="musica/those_eyes.mp3.mp3" autoplay loop></audio>
+
+  <script>
+    // Esperar a que el DOM cargue
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = document.querySelectorAll('.gallery img');
+      const modal = document.getElementById('messageModal');
+      const modalMessage = document.getElementById('modalMessage');
+      const closeModal = document.getElementById('closeModal');
+
+      // Asignar evento clic a cada imagen
+      images.forEach(image => {
+        image.addEventListener('click', function() {
+          // Obtener el mensaje personalizado del atributo data-message
+          const message = this.getAttribute('data-message');
+          modalMessage.textContent = message;
+          modal.classList.add('active');
+        });
+      });
+
+      // Cerrar el modal al hacer clic en el botón
+      closeModal.addEventListener('click', function() {
+        modal.classList.remove('active');
+      });
+
+      // También cerrar el modal si se hace clic fuera del contenido
+      modal.addEventListener('click', function(e) {
+        if(e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
